@@ -96,14 +96,14 @@ function App() {
 
     <div className="App">
       <div className="information">
-        <label>Name:</label>
+        <label>Model:</label>
         <input
           type="text"
           onChange={(event) => {
             setName(event.target.value);
           }}
         />
-        <label>Age:</label>
+        <label>Model Year:</label>
         <input
           type="number"
           onChange={(event) => {
@@ -140,10 +140,10 @@ function App() {
           return (
             <div className="car">
               <div>
-                <h3>Name: {val.name}</h3>
-                <h3>Age: {val.year}</h3>
-                <h3>Country: {val.maker}</h3>
-                <h3>Summary: {val.review}</h3>
+                <h3>Model: {val.name}</h3>
+                <h3>Model Year: {val.year}</h3>
+                <h3>Description: {val.maker}</h3>
+                <h3>Maker: {val.review}</h3>
                 <h3>Price: {val.price}</h3>
               </div>
               <div>
