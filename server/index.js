@@ -33,7 +33,7 @@ app.post("/api/insert/", (req, res) => { //the request from the body and the nam
     const carName = req.body.carName
     const carReview = req.body.carReview
 
-    //inserting our values 
+    //inserting our values to car_reviews db
     const sqlInsert = 
     "INSERT INTO car_reviews (carName, carReview) VALUES (?,?)";
     db.query(sqlInsert, [carName, carReview], (err, result) => {
@@ -41,9 +41,11 @@ app.post("/api/insert/", (req, res) => { //the request from the body and the nam
 
     });
 });
+
 // with "/", it just goes to url. when you say app.get, you pass the route, then the paprameters of a function. 
 // req = require, when we want to get info from frontend
-// res = response, when we want to send info to frontend,
+// res = response, when we want to send info to frontend
+
 app.get("/", (req, res)=> { 
     console.log("inserting");
     const sqlInsert = "INSERT INTO `car_reviews` (`carName`, `carReview`) VALUES ('bmw', 'good car');" //testing to see if db is working
@@ -51,8 +53,32 @@ app.get("/", (req, res)=> {
     res.send('hello w0rbv54ld'); //testing sending to server, see if it inserts
     })
 });
+
+
+//deleting items from db, method to pass parameters to route
+app.delete('/api/delete/:carName', (req, res)=> {
+    const name = req.params.movieName
+    const sqlDelete = 
+    "DELETE FROM car_reviews WHERE carName = ?"; //deletes spesific car name
+    
+    db.query(sqlDelete, name, (err, result) => {
+        if(err) console.log(err);
+    })
+})
+    app.put('/api/update', (req, res)=> {
+    const name = body.params.carName;
+    const name = body.params.carReview;
+    const sqlUpdate = "UPDATE SET car_reviews carReview = ? WHERE carName= " // ? is the variable were gonna pass
+ 
+    
+    db.query(sqlUpdate, [review, name], (err, result) => { //instead of passing one name, were gonna pass an array
+        if(err) console.log(err);
+    });
+})
+
+
 // we want to listen to server, passing port 3001 since localhost is running 3000
 app.listen(port, () => {
-console.log("listen to port: " + port);   //testing to make sure server is workin
+console.log("listen to port: " + port);   //testing to make sure server is working
 
 });
