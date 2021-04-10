@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import './App.css';
 import Axios from 'axios';
+import { useSpring, animated } from "react-spring";
+import { useDrag } from "react-use-gesture";
 
-function App() {
+export default function App() {
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [maker, setMaker] = useState("");
   const [review, setReview] = useState("");
   const [year, setYear] = useState(0);
-
   const [newPrice, setNewPrice] = useState(0);//state created for changed input
-
   const [carList, setCarList] = useState([]);
 
+  //sendData();
   //  // requesting back from backend, responce variable = data passed through
   //   useEffect(()=> {
   //     Axios.get('https://http//localhost:3001/api/get').then((response)=> {
@@ -22,10 +23,8 @@ function App() {
   //     });
   //   }, []);
 
-
   //when the backend is requesting the name of the body from the backend, 
   //were requesting a variable that is going to be passed by the axios.post
-
   const addCar = () => {
     Axios.post("http://localhost:3001/create", {
 
@@ -71,12 +70,9 @@ function App() {
                 carPrice: newPrice,
               }
               : val;
-
           })
-
         );
       }
-
     );
     console.log("updateCar :");
   };
@@ -93,8 +89,8 @@ function App() {
   };
 
   return (
-
     <div className="App">
+      <PullRelease />
       <div className="information">
         <label>Model:</label>
         <input
@@ -179,7 +175,25 @@ function App() {
   );
 }
 
+function PullRelease() {
+  const [{ x, y }, set] = useSpring(() => ({ x: 0, y: 0 }));
+  //console.log("pulling);
+  const bind = useDrag(({ down, movement: [mx, my] }) => {
+    //console.log(down);
+    set({ x: down ? mx : 0, y: down ? my : 0 });
+    //console.log("release");
+  });
 
+  return (
+    <animated.div
+      {...bind()}
+      style={{ x, y }}
+      styles="width:10px;height:10px;background-color:red"
+    >
+      <h1 className="grab">Hello CodeSandox</h1>
+    </animated.div>
+  );
+}
 
 //   const submitReview = ()=> {
 //     Axios.post("http://localhost:3001/api/insert", {
@@ -237,4 +251,25 @@ function App() {
 //   );
 // }
 
-export default App;
+// function sendData() {
+//   console.log("exporting");
+//   return (
+//     <div>
+//       <PullRelease />
+//     </div>
+//   );
+// }
+
+// export default function App() {
+//   console.log("exporting app");
+// }
+
+//      <App />
+
+// export default function SafeString(string) {
+//   this.string = string;
+// }
+
+// SafeString.prototype.toString = function() {
+//   return "" + this.string;
+// };

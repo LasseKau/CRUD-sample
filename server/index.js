@@ -4,6 +4,7 @@ const app = express();
 const mysql = require('mysql');
 const port = 3001;
 
+
 app.use(cors());
 app.use(express.json()); //allows to grab information from the frontend, Returns middleware 
 app.use(express.urlencoded({ extended: true }))
@@ -14,7 +15,6 @@ const db = mysql.createPool({
   password: 'moimoi123',
   database: 'cruddb',
 });
-
 
 // // req = require, when we want to get info from frontend
 // // res = response, when we want to send info to frontend
@@ -57,7 +57,6 @@ app.put("/update", (req, res) => {
   const id = req.body.id;
   const price = req.body.price;
   db.query(
-
     "UPDATE car_reviews SET carPrice = ? WHERE id = ?",
     [price, id],
     (err, result) => {
@@ -84,7 +83,6 @@ app.delete("/delete/:id", (req, res) => {
   });
 });
 
-
 // app.get('/api/get', (req, res) => {
 //     const sqlSelect = 
 //     "Select * FROM car_reviews";   //selecting all info
@@ -106,7 +104,6 @@ app.delete("/delete/:id", (req, res) => {
 //     "INSERT INTO car_reviews (carName, carReview) VALUES (?,?)";
 //     db.query(sqlInsert, [carName, carReview], (err, result) => {
 //     console.log("error" + err);
-
 //     });
 // });
 
@@ -131,9 +128,7 @@ app.delete("/delete/:id", (req, res) => {
 //     });
 // })
 
-
 // we want to listen to server, passing port 3001 since localhost is running 3000
 app.listen(port, () => {
   console.log("listen to port: " + port);   //testing to make sure server is working
-
 });
