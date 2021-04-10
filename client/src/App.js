@@ -12,15 +12,15 @@ function App() {
 
   const [newPrice, setNewPrice] = useState(0);//state created for changed input
 
-  const [carList, setCarList] = useState([]); 
+  const [carList, setCarList] = useState([]);
 
-//  // requesting back from backend, responce variable = data passed through
-//   useEffect(()=> {
-//     Axios.get('https://http//localhost:3001/api/get').then((response)=> {
-//       console.log(response.data);
-//       Set.CarReviewList(response.data);
-//     });
-//   }, []);
+  //  // requesting back from backend, responce variable = data passed through
+  //   useEffect(()=> {
+  //     Axios.get('https://http//localhost:3001/api/get').then((response)=> {
+  //       console.log(response.data);
+  //       Set.CarReviewList(response.data);
+  //     });
+  //   }, []);
 
 
   //when the backend is requesting the name of the body from the backend, 
@@ -28,7 +28,7 @@ function App() {
 
   const addCar = () => {
     Axios.post("http://localhost:3001/create", {
-      
+
       carName: name,
       carYear: year,
       carMaker: maker,
@@ -59,26 +59,26 @@ function App() {
     Axios.put("http://localhost:3001/update", { price: newPrice, id: id }).then(
       (response) => {
         setCarList(
-          
+
           carList.map((val) => {
             return val.id == id //===
               ? {
-                  id: val.id,
-                  carName: val.name,
-                  carMaker: val.maker,
-                  carYear: val.year,
-                  carReview: val.review,
-                  carPrice: newPrice,
-                }
+                id: val.id,
+                carName: val.name,
+                carMaker: val.maker,
+                carYear: val.year,
+                carReview: val.review,
+                carPrice: newPrice,
+              }
               : val;
-              
+
           })
-          
+
         );
       }
-      
+
     );
-  console.log("updateCar :");  
+    console.log("updateCar :");
   };
 
   const deleteCar = (id) => {
@@ -93,7 +93,7 @@ function App() {
   };
 
   return (
-    
+
     <div className="App">
       <div className="information">
         <label>Name:</label>
@@ -117,7 +117,7 @@ function App() {
             setMaker(event.target.value);
           }}
         />
-        <label>About:</label>
+        <label>Description:</label>
         <input
           type="text"
           onChange={(event) => {
@@ -192,7 +192,7 @@ function App() {
 //       ]);
 //       console.log("runs");
 //     }
-    
+
 //   const deleteReview = (car) => {
 //     Axios.delete(`http://localhost:3001/api/delete/${car}`); //deleted objects have to be set within the parameters of the url
 //   }
@@ -223,7 +223,7 @@ function App() {
 //             <div className="card">
 //               <h1>{val.carName}</h1>
 //               <p>{val.carReview}</p>
-              
+
 //               <button onClick={() =>{deleteReview(val.carName)}}>Delete</button>  
 //               <input type="text" id="updateInput" onChange={(e) =>{ //for every delete review we have a different car
 //                 setNewReview(e.target.value)
