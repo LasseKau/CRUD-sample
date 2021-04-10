@@ -12,31 +12,32 @@ const db = mysql.createPool({
 });
 
 app.use(cors());
-app.use(express.json()); //allows to grab information from the frontend
+app.use(express.json()); //allows to grab information from the frontend, Returns middleware 
 app.use(express.urlencoded({extended: true}))
 
 //route to get info about existing cars in a json to the frontend from db
 app.get('/api/get', (req, res) => {
     const sqlSelect = 
-  
     "Select * FROM car_reviews";   //selecting all info
-    db.query(sqlInsert, [carName, carReview], (err, result) => {
-        console.log(result);
+    db.query(sqlSelect, [carName, carReview], (err, result) => {
+        console.log("result: " + result);
+        res.send("result: " + result); //sending an array of the results to frontend
     })
 })
 
-app.post("/api/insert/", (req, res) => {
+//requesting info from frontend 
+
+app.post("/api/insert/", (req, res) => { //the request from the body and the name of the variable were requesting a variable that is passed by the axios.post from the frontend. 
 
     //variables to insert
     const carName = req.body.carName
     const carReview = req.body.carReview
-    //we request 
 
     //inserting our values 
     const sqlInsert = 
     "INSERT INTO car_reviews (carName, carReview) VALUES (?,?)";
     db.query(sqlInsert, [carName, carReview], (err, result) => {
-    console.log(err);
+    console.log("error" + err);
 
     });
 });
