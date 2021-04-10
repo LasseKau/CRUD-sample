@@ -133,23 +133,23 @@ function App() {
         />
         <button onClick={addCar}>Add Cars</button>
       </div>
-      <div className="cars">
+      <div className="carss">
         <button onClick={getCars}>Show cars</button>
 
         {carList.map((val, key) => {
           return (
             <div className="car">
               <div>
-                <h3>Model: {val.name}</h3>
-                <h3>Model Year: {val.year}</h3>
-                <h3>Description: {val.maker}</h3>
-                <h3>Maker: {val.review}</h3>
-                <h3>Price: {val.price}</h3>
+                <h3>Model: {val.carName}</h3>
+                <h3>Model Year: {val.carYear}</h3>
+                <h3>Description: {val.carMaker}</h3>
+                <h3>Maker: {val.carReview}</h3>
+                <h3>Price: {val.carPrice}</h3>
               </div>
               <div>
                 <input
                   type="text"
-                  placeholder="increase price... "
+                  placeholder="test"
                   onChange={(event) => {
                     setNewPrice(event.target.value);
                   }}

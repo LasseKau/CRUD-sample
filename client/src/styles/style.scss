@@ -1,5 +1,27 @@
+html 
+
+
 header {
     background: lightskyblue;
     display: flex;
     justify-content: center;
+}
+body {
+    background: fade-in($color: #7cc0e7, $amount: 1)
+}
+
+input-main{
+
+}
+
+input-main-hover {
+
+}
+
+input-add-car {
+
+}
+
+input-show-car {
+
 }
