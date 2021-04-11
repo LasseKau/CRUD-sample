@@ -1,0 +1,54 @@
+import React, { useState, useEffect } from 'react'
+
+import { useSpring, animated } from "react-spring";
+import { useDrag } from "react-use-gesture";
+//import { App } from 'St;
+
+//fix asap
+function dragOnClick(props) {
+    console.log("animated div");
+    <animated.div
+        {...bind()}
+        style={{ x, y }}
+        styles="width:20px;height:20px;background-color:red"
+    >
+        <div className="content" id="j1_64_anchor">
+            <button onClick="int()" class="collapsible">Interfaces</button>
+        </div>
+    </animated.div>
+
+}
+
+function clickListener(props) {
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('button').addEventListener('click', int)
+    });
+    console.log("click");
+};
+
+function DragButton(props) {
+    const [{ x, y }, set] = useSpring(() => ({ x: 0, y: 0 }));
+    console.log("pulling");
+    dragOnClick();
+    const bind = useDrag(({ down, movement: [mx, my] }) => {
+        //console.log(down);
+        set({ x: down ? mx : 0, y: down ? my : 0 });
+        console.log("release");
+    })
+};
+
+function int(props) {
+    console.log('calling');
+    var source = document.getElementById('j1_64_anchor').click();
+    ///////////////
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    DragButton();
+}
+//   function collapsible(props) {
+//   console.log("collapsible"); 
+//   var coll = document.getElementsByClassName("collapsible");
+//   var i;}
+
+
+export { clickListener, DragButton, int, dragOnClick }
