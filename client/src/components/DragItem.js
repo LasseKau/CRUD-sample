@@ -17,7 +17,7 @@ function dragOnClick(props) {
     </animated.div>
 };
 
-function DragButton(props) {
+export default function DragButton(props) {
     const [{ x, y }, set] = useSpring(() => ({ x: 0, y: 0 }));
     console.log("pulling");
     dragOnClick();
@@ -27,6 +27,8 @@ function DragButton(props) {
         console.log("release");
     })
 };
+
+
 
 
 

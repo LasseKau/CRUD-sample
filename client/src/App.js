@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import './App.css';
 import Axios from 'axios';
-import { useSpring, animated } from "react-spring";
-import { useDrag } from "react-use-gesture";
 
-export default function App() {
+export function App() {
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
@@ -14,7 +12,6 @@ export default function App() {
   const [newPrice, setNewPrice] = useState(0);//state created for changed input
   const [carList, setCarList] = useState([]);
 
-  //sendData();
   //  // requesting back from backend, responce variable = data passed through
   //   useEffect(()=> {
   //     Axios.get('https://http//localhost:3001/api/get').then((response)=> {
@@ -90,16 +87,15 @@ export default function App() {
 
   return (
     <div className="App">
-      <PullRelease />
       <div className="information">
-        <label>Model:</label>
+        <label>Name:</label>
         <input
           type="text"
           onChange={(event) => {
             setName(event.target.value);
           }}
         />
-        <label>Model Year:</label>
+        <label>Model year:</label>
         <input
           type="number"
           onChange={(event) => {
@@ -113,39 +109,39 @@ export default function App() {
             setMaker(event.target.value);
           }}
         />
-        <label>Description:</label>
+        <label>Review:</label>
         <input
           type="text"
           onChange={(event) => {
             setReview(event.target.value);
           }}
         />
-        <label>Price:</label>
+        <label>Cost (year):</label>
         <input
           type="number"
           onChange={(event) => {
             setPrice(event.target.value);
           }}
         />
-        <button onClick={addCar}>Add Cars</button>
+        <button onClick={addCar}>Add Car</button>
       </div>
-      <div className="carss">
-        <button onClick={getCars}>Show cars</button>
+      <div className="car">
+        <button onClick={getCars}>Show Cars</button>
 
         {carList.map((val, key) => {
           return (
             <div className="car">
               <div>
-                <h3>Model: {val.carName}</h3>
-                <h3>Model Year: {val.carYear}</h3>
-                <h3>Description: {val.carMaker}</h3>
-                <h3>Maker: {val.carReview}</h3>
+                <h3>Name: {val.carName}</h3>
+                <h3>Model year: {val.carYear}</h3>
+                <h3>About: {val.carReview}</h3>
+                <h3>Maker: {val.carMaker}</h3>
                 <h3>Price: {val.carPrice}</h3>
               </div>
               <div>
                 <input
                   type="text"
-                  placeholder="test"
+                  placeholder="2000..."
                   onChange={(event) => {
                     setNewPrice(event.target.value);
                   }}
@@ -175,92 +171,7 @@ export default function App() {
   );
 }
 
-function PullRelease() {
-  const [{ x, y }, set] = useSpring(() => ({ x: 0, y: 0 }));
-  //console.log("pulling);
-  const bind = useDrag(({ down, movement: [mx, my] }) => {
-    //console.log(down);
-    set({ x: down ? mx : 0, y: down ? my : 0 });
-    //console.log("release");
-  });
-
-  return (
-    <animated.div
-      {...bind()}
-      style={{ x, y }}
-      styles="width:10px;height:10px;background-color:red"
-    >
-      <h1 className="grab">Hello CodeSandox</h1>
-    </animated.div>
-  );
-}
-
-//   const submitReview = ()=> {
-//     Axios.post("http://localhost:3001/api/insert", {
-//       carName: carName,
-//       carReview: review,
-//     });
-
-//     setReviewList([...carReviewList, 
-//       {movieName: carName, carReview: review},
-//       ]);
-//       console.log("runs");
-//     }
-
-//   const deleteReview = (car) => {
-//     Axios.delete(`http://localhost:3001/api/delete/${car}`); //deleted objects have to be set within the parameters of the url
-//   }
-
-//   const updateReview = (car) => {
-//     Axios.put("http://localhost:3001/api/update", {
-//       carName: car,
-//       carReview: newReview,
-//     });
-//     setNewReview("")
-//   }
-
-//   return (
-//     <div className="App">
-//       <h1>CRUD APP</h1>
-
-//       <div className="form">
-//       <label>Car Name: </label>
-//       <input type="text" name="carName" onChange={(e)=> {
-//       setCarName(e.target.value)
-//       }}/>
-//       <label>Review: </label>
-//       <input type="text" name="review" onChange={(e)=> {
-//       setReview(e.target.value)}}/>
-//       <button onClick={submitReview}>Submit</button>
-//       {carReviewList.map((val)=>{
-//           return (
-//             <div className="card">
-//               <h1>{val.carName}</h1>
-//               <p>{val.carReview}</p>
-
-//               <button onClick={() =>{deleteReview(val.carName)}}>Delete</button>  
-//               <input type="text" id="updateInput" onChange={(e) =>{ //for every delete review we have a different car
-//                 setNewReview(e.target.value)
-//               }} />
-//               <button onClick={()=>{ updateReview(val.carName)}} >Update</button>
-//             </div>
-//           )
-//         })}
-//       </div>
-//     </div>
-//   );
-// }
-
-// function sendData() {
-//   console.log("exporting");
-//   return (
-//     <div>
-//       <PullRelease />
-//     </div>
-//   );
-// }
-
-// export default function App() {
+export default App;
 //   console.log("exporting app");
 // }
 
@@ -272,4 +183,4 @@ function PullRelease() {
 
 // SafeString.prototype.toString = function() {
 //   return "" + this.string;
-// };
+// 
